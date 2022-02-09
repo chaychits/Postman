@@ -55,7 +55,8 @@
 					]
 				},
 				"url": {
-					"raw": "162.55.220.72:5005/first",
+					"raw": "http://162.55.220.72:5005/first",
+					"protocol": "http",
 					"host": [
 						"162",
 						"55",
@@ -414,6 +415,12 @@
 					"script": {
 						"exec": [
 							"// Вставить параметр salary из окружения в request\r",
+							"// var jsonData = JSON.parse(responseBody);\r",
+							"// pm.environment.set(salary, jsonData.salary);\r",
+							"// pm.environment.get({salary});\r",
+							"\r",
+							"\r",
+							"\r",
 							"// 2. Вставить параметр age из окружения в age\r",
 							"// 3. Вставить параметр name из окружения в name\r",
 							"\r",
@@ -490,6 +497,13 @@
 							"// 22. ***Написать цикл который выведет в консоль по порядку элементы списка из параметра person.\r",
 							"\r",
 							"\r",
+							"var l = Object.keys(user_info_2.person).length;\r",
+							"console.log(l);\r",
+							"\r",
+							"for (var i=0; i < l; i++) {\r",
+							"    console.log(Object.keys(user_info_2.person)[i]);\r",
+							"}\r",
+							"\r",
 							"   \r",
 							"\r",
 							"\r",
@@ -533,6 +547,59 @@
 					"port": "5005",
 					"path": [
 						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"var resp_token = jsonData.token;\r",
+							"console.log(resp_token);\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"token\", resp_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "login",
+							"value": "marina",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/login",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"login"
 					]
 				}
 			},
